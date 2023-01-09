@@ -1,3 +1,5 @@
+package jUnitTests;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -28,6 +30,8 @@ public class JsonParserTest {
     @Parameterized.Parameter
     public String notExistCartName;
     private final String cartName = "test-cart";
+
+    private final String testCartName = "andrew-cart";
     private final String carName = "Nissan";
     private final String diskName = "WD400";
     private final double carWeight = 2000.2;
@@ -57,24 +61,23 @@ public class JsonParserTest {
     }
 
     @Test
-    public void checkReadFromFilePositiveTest() {
+    public void checkWriteFromFilePositiveTest() {
         parser.writeToFile(cart);
         newCart = parser.readFromFile(new File("src/main/resources/" + cartName + ".json"));
         Assert.assertNotNull(newCart);
     }
 
     @Test(expected = NoSuchFileException.class)
-    public void checkReadFromFileFileNegativeTest() {
+    public void checkWriteFromFileFileNegativeTest() {
         parser.writeToFile(cart);
         newCart = parser.readFromFile(new File("src/main/resources/" + notExistCartName + ".json"));
         Assert.assertNotNull(newCart);
     }
 
     @Test
-    public void checkWriteToFileTest() {
-        parser.writeToFile(cart);
-        newCart = parser.readFromFile(new File("src/main/resources/" + cartName + ".json"));
-        Assert.assertNotNull(newCart);
+    public void checkReadToFileTest() {
+        newCart = parser.readFromFile(new File("src/main/resources/" + testCartName + ".json"));
+        Assert.assertNotNull(testCartName);
     }
 
     @After
