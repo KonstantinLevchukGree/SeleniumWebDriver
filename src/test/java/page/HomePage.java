@@ -1,21 +1,19 @@
 package page;
 
+import lombok.AllArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static tests.BaseTest.wait;
-
+@AllArgsConstructor
 public class HomePage {
-    private static WebDriver driver;
-    private static final By userMenuButton = By.xpath("//div[contains(@class,'User')]");
-    private static final String userNameLabel = "//div[contains(@class,'name')]/span[contains(text(),'%s')]";
+    private WebDriver driver;
+    private WebDriverWait wait;
+    private final By userMenuButton = By.xpath("//div[contains(@class,'User')]");
+    private final String userNameLabel = "//div[contains(@class,'name')]/span[contains(text(),'%s')]";
 
-    public HomePage(WebDriver driver) {
-        HomePage.driver = driver;
-    }
-
-    private static void openUserMenu() {
+    private void openUserMenu() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(userMenuButton));
         driver.findElement(userMenuButton).click();
     }

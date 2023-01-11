@@ -1,31 +1,28 @@
 package page;
 
+import lombok.AllArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static tests.BaseTest.wait;
-
+@AllArgsConstructor
 public class LoginPage {
-    private static WebDriver driver;
-    private static final By loginInput = By.id("passp-field-login");
-    private static final By loginButton = By.id("passp:sign-in");
-    private static final By passwordInput = By.id("passp-field-passwd");
+    private WebDriver driver;
+    private WebDriverWait wait;
+    private final By loginInput = By.id("passp-field-login");
+    private final By loginButton = By.id("passp:sign-in");
+    private final By passwordInput = By.id("passp-field-passwd");
 
-    public LoginPage(WebDriver driver) {
-        LoginPage.driver = driver;
-    }
-
-    private static void inputLogin(String login) {
+    private void inputLogin(String login) {
         driver.findElement(loginInput).sendKeys(login);
     }
 
-    private static void clickLoginButton() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(loginButton));
+    private void clickLoginButton() {
         driver.findElement(loginButton).click();
     }
 
-    private static void inputPassword(String password) {
+    private void inputPassword(String password) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(passwordInput));
         driver.findElement(passwordInput).sendKeys(password);
     }
@@ -35,6 +32,6 @@ public class LoginPage {
         clickLoginButton();
         inputPassword(password);
         driver.findElement(loginButton).click();
-        return new HomePage(driver);
+        return new HomePage(driver, wait);
     }
 }

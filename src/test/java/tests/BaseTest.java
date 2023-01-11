@@ -1,7 +1,7 @@
 package tests;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
+import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,17 +13,17 @@ import java.time.Duration;
 import java.util.Properties;
 
 public class BaseTest {
-    private static WebDriver driver;
-    public static StartPage startPage;
-    public static WebDriverWait wait;
-    private static final Properties dataTests = PropertyUtil.getProperties("testsData.properties");
+    private WebDriver driver;
+    private WebDriverWait wait;
+    public StartPage startPage;
+    private final Properties dataTests = PropertyUtil.getProperties("testsData.properties");
 
-    @BeforeClass
-    public static void setUp() {
+    @Before
+    public void setUp() {
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-       // chromeOptions.setHeadless(true);
+        //chromeOptions.setHeadless(true);
 
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
@@ -31,11 +31,11 @@ public class BaseTest {
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        startPage = new StartPage(driver);
+        startPage = new StartPage(driver, wait);
     }
 
-    @AfterClass
-    public static void closeChrome() {
+    @After
+    public void closeChrome() {
         driver.quit();
     }
 }
