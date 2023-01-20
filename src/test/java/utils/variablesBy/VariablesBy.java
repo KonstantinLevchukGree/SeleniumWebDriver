@@ -1,4 +1,4 @@
-package variablesBy;
+package utils.variablesBy;
 
 import org.openqa.selenium.By;
 
