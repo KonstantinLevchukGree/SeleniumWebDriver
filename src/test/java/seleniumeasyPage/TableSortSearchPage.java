@@ -29,9 +29,9 @@ public class TableSortSearchPage {
         driver.get(dataTests.getProperty("seleniumEasyTableUrl"));
     }
 
-    private void selectOptionsDropdown() {
+    private void selectOptionsDropdown(String selectEntries) {
         Select select = new Select(driver.findElement(SELECT));
-        select.selectByValue(dataTests.getProperty("selectEntries"));
+        select.selectByValue(selectEntries);
     }
 
     private void clickNextButton() {
@@ -41,9 +41,10 @@ public class TableSortSearchPage {
         }
     }
 
-    public List<User> getUsersByAgeAndSalary(int minAgeUser, int maxSalaryUser) {
+    public List<User> getUsersByAgeAndSalary(int minAgeUser, int maxSalaryUser, String selectEntries) {
 
-        selectOptionsDropdown();
+        selectOptionsDropdown(selectEntries);
+
         List<User> userList = new ArrayList<>();
 
         for (int i = 0; i < driver.findElements(NUMBER_PAGES).size() - 1; i++) {
@@ -51,25 +52,25 @@ public class TableSortSearchPage {
             List<WebElement> rowsList = driver.findElements(ROWS_USERS);
 
             for (WebElement element : rowsList) {
-                User user = new User();
+
                 int userAge = Integer.parseInt(element.findElement(COLUMN_AGE).getText());
                 int salaryUser = Integer.parseInt(element.findElement(COLUMN_SALARY).getText()
                         .replace("$", "").replace(",", "").replace("/y", "").trim());
 
-                if (userAge > minAgeUser && salaryUser < maxSalaryUser) {
-                    user.setUserName(element.findElement(COLUMN_NAME).getText());
-                    user.setUserPosition(element.findElement(COLUMN_POSITION).getText());
-                    user.setUserOffice(element.findElement(COLUMN_OFFICE).getText());
-                    user.setAgeUser(Integer.parseInt(element.findElement(COLUMN_AGE).getText()));
-                    user.setSalaryUser(Integer.parseInt(element.findElement(COLUMN_SALARY).getText()
-                            .replace("$", "").replace(",", "").replace("/y", "").trim()));
+                if (userAge > minAgeUser & salaryUser < maxSalaryUser) {
+                    User user = new User(
+                            element.findElement(COLUMN_NAME).getText(),
+                            element.findElement(COLUMN_POSITION).getText(),
+                            element.findElement(COLUMN_OFFICE).getText(),
+                            Integer.parseInt(element.findElement(COLUMN_AGE).getText()),
+                            Integer.parseInt(element.findElement(COLUMN_SALARY).getText()
+                                    .replace("$", "").replace(",", "").replace("/y", "").trim())
+                    );
                     userList.add(user);
                 }
-
             }
             clickNextButton();
         }
         return userList;
     }
-
 }

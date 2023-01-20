@@ -1,5 +1,6 @@
 package seleniumeasyTests;
 
+import mailYandexTests.BaseTest;
 import modelUser.User;
 import org.junit.Test;
 import seleniumeasyPage.TableSortSearchPage;
@@ -8,24 +9,26 @@ import utils.singleton.LocalChromeDriver;
 
 import java.util.List;
 import java.util.Properties;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TableSortSearchTest {
+public class TableSortSearchTest extends BaseTest {
     private TableSortSearchPage tableSortSearchPage;
     private final Properties dataTests = PropertyUtil.getProperties("testsData.properties");
 
     @Test
-    public void openAlert() {
+    public void getUserByFilter() {
 
         tableSortSearchPage = new TableSortSearchPage(LocalChromeDriver.getInstance());
 
-        List<User> listUsers = tableSortSearchPage.getUsersByAgeAndSalary(Integer.parseInt(dataTests.getProperty("minUserAge")), Integer.parseInt(dataTests.getProperty("maxUserSalary")));
+        List<User> listUsers = tableSortSearchPage.getUsersByAgeAndSalary(Integer.parseInt(dataTests.getProperty("minUserAge"))
+                , Integer.parseInt(dataTests.getProperty("maxUserSalary"))
+                , dataTests.getProperty("selectEntries"));
 
-        User randomUserFromList = listUsers.get(new Random().nextInt(listUsers.size()));
-
-        assertTrue(randomUserFromList.getAgeUser() > Integer.parseInt(dataTests.getProperty("minUserAge")), "User age less input age ");
-        assertTrue(randomUserFromList.getSalaryUser() < Integer.parseInt(dataTests.getProperty("maxUserSalary")), "User salary more input salary");
+        for (User listUser : listUsers) {
+            assertTrue(listUser.getAgeUser() > Integer.parseInt(dataTests.getProperty("minUserAge"))
+                            & listUser.getSalaryUser() < Integer.parseInt(dataTests.getProperty("maxUserSalary"))
+                    , "User age less input age or User salary more input salary");
+        }
     }
 }
