@@ -43,7 +43,7 @@ public class CartTest {
     }
 
     @Test
-    public void checkTotalPriceCartTest() {
+    public void checkTotalPriceCart() {
         softAssert.assertNotNull(cart.getTotalPrice(), "Total Price does not exist");
         softAssert.assertEquals(cart.getTotalPrice(), carPrice + diskPrice + (carPrice + diskPrice) * TAX, "Total Price not equal Total Price in test data");
         softAssert.assertAll("Soft assertions failed");
@@ -51,7 +51,7 @@ public class CartTest {
 
 
     @Test(enabled = false, description = "Bug: delete RealItem and VirtualItem methods")
-    public void deleteRealItemAndVirtualItemFromCart() {
+    public void checkDeleteRealItemAndVirtualItemFromCart() {
         cart.deleteRealItem(car);
         cart.deleteVirtualItem(disk);
         Assert.assertEquals(cart.getTotalPrice(), 0, "RealItem or VirtualItem did not delete from Cart");

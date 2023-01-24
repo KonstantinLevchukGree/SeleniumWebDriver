@@ -11,7 +11,6 @@ public class BaseTest {
     @Before
     public void setUp() {
         LocalChromeDriver.getInstance().manage().window().maximize();
-
         //Implicit waiter
         LocalChromeDriver.getInstance().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }

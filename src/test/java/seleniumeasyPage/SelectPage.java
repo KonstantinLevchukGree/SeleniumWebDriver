@@ -18,19 +18,16 @@ public class SelectPage {
 
     public SelectPage(WebDriver driver) {
         this.driver = driver;
-        this.driver.get(dataTests.getProperty("seleniumEasySelectUrl"));
+        this.driver.get(dataTests.getProperty("select.dropdown.url"));
     }
 
 
     public List<WebElement> getSelectRandomOptions() {
         Select multiSelect = new Select(driver.findElement(MULTI_SELECT));
-
         List<WebElement> list = multiSelect.getOptions();
         List<WebElement> selectOptions = new ArrayList<>();
-
         Random random = new Random();
-
-        for (int i = 0; i < Integer.parseInt(dataTests.getProperty("numberOptions")); i++) {
+        for (int i = 0; i < Integer.parseInt(dataTests.getProperty("number.options")); i++) {
             int randomOption = random.nextInt(list.size());
             selectOptions.add(list.get(randomOption));
             multiSelect.selectByIndex(randomOption);

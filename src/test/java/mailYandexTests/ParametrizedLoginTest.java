@@ -15,14 +15,10 @@ public class ParametrizedLoginTest extends BaseTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/userData.csv")
 
-    public void authentication(String userLogin, String UserPassword) {
-
+    public void verifyAuthentication(String userLogin, String UserPassword) {
         startPage = new StartPage(LocalChromeDriver.getInstance());
-
         LoginPage loginPage = startPage.openLoginPage();
-
         HomePage homePage = loginPage.openHomePage(userLogin, UserPassword);
-
         assertEquals(homePage.getUserName(userLogin), userLogin);
     }
 }

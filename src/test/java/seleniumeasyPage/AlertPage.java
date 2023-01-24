@@ -21,12 +21,12 @@ public class AlertPage {
 
     public AlertPage(WebDriver driver) {
         this.driver = driver;
-        this.driver.get(dataTests.getProperty("seleniumEasyAlertUrl"));
+        this.driver.get(dataTests.getProperty("js.alert.url"));
     }
 
     private Alert openAlertAndWait(By by) {
         driver.findElement(by).click();
-        return new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(dataTests.getProperty("explicitTime")))).until(ExpectedConditions.alertIsPresent());
+        return new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(dataTests.getProperty("explicit.time")))).until(ExpectedConditions.alertIsPresent());
     }
 
     private String getAlertTextAndAccept(By by) {
@@ -57,7 +57,7 @@ public class AlertPage {
         return driver.findElement(CONFIRM_BOX_TEXT).getText();
     }
 
-    public String getPromptText() {
+    public String getPromptInputText() {
         return getAlertTextAndDismiss(PROMPT_BUTTON);
     }
 
@@ -67,7 +67,7 @@ public class AlertPage {
         return driver.findElement(PROMPT_BOX_TEXT).getText();
     }
 
-    public String inputPromptText(String text) {
+    public String getPromptInputText(String text) {
         Alert alert = openAlertAndWait(PROMPT_BUTTON);
         alert.sendKeys(text);
         alert.accept();

@@ -2,9 +2,14 @@ package seleniumeasyPage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertyUtil;
+import utils.singleton.LocalChromeDriver;
 
+import java.time.Duration;
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 public class ProgressBarPage {
     private final WebDriver driver;
@@ -14,21 +19,27 @@ public class ProgressBarPage {
 
     public ProgressBarPage(WebDriver driver) {
         this.driver = driver;
-        this.driver.get(dataTests.getProperty("seleniumEasyProgressBarUrl"));
+        this.driver.get(dataTests.getProperty("progress.bar.url"));
+    }
+
+    private void startProgressBar() {
+        driver.findElement(DOWNLOAD_BUTTON).click();
     }
 
     public int getPercentProgressBar() {
-        driver.findElement(DOWNLOAD_BUTTON).click();
-        int percentProgressBar= 0;
-        while (Integer.parseInt(driver.findElement(PERCENT_PROGRESS_BAR).getText().replace("%","").trim()) <= Integer.parseInt(dataTests.getProperty("percentProgressBar"))) {
+        new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(dataTests.getProperty("explicit.time"))))
+                .until(ExpectedConditions.visibilityOfElementLocated(PERCENT_PROGRESS_BAR));
+        return Integer.parseInt(LocalChromeDriver.getInstance().findElement(PERCENT_PROGRESS_BAR).getText().replace("%", "")
+                .trim());
+    }
 
-            percentProgressBar=Integer.parseInt(driver.findElement(PERCENT_PROGRESS_BAR).getText().replace("%","").trim());
-
-            if(percentProgressBar>Integer.parseInt(dataTests.getProperty("percentProgressBar"))){
-                driver.navigate().refresh();
-                break;
-            }
-        }
-        return percentProgressBar;
+    public void stopProgressBarValueAndRefreshPage() {
+        startProgressBar();
+        Pattern pattern = Pattern.compile("[5-9](\\d{1})");
+        new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(dataTests.getProperty("explicit.time.progress.bar"))))
+                .until(ExpectedConditions.textMatches(PERCENT_PROGRESS_BAR, pattern));
+        driver.navigate().refresh();
     }
 }
+
+

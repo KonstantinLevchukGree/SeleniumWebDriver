@@ -17,17 +17,12 @@ public class TableSortSearchTest extends BaseTest {
     private final Properties dataTests = PropertyUtil.getProperties("testsData.properties");
 
     @Test
-    public void getUserByFilter() {
-
+    public void verifyUsersByFilterFromTable() {
         tableSortSearchPage = new TableSortSearchPage(LocalChromeDriver.getInstance());
-
-        List<User> listUsers = tableSortSearchPage.getUsersByAgeAndSalary(Integer.parseInt(dataTests.getProperty("minUserAge"))
-                , Integer.parseInt(dataTests.getProperty("maxUserSalary"))
-                , dataTests.getProperty("selectEntries"));
-
+        List<User> listUsers = tableSortSearchPage.getUsersByAgeAndSalary();
         for (User listUser : listUsers) {
-            assertTrue(listUser.getAgeUser() > Integer.parseInt(dataTests.getProperty("minUserAge"))
-                            & listUser.getSalaryUser() < Integer.parseInt(dataTests.getProperty("maxUserSalary"))
+            assertTrue(listUser.getAgeUser() > Integer.parseInt(dataTests.getProperty("min.user.age"))
+                            & listUser.getSalaryUser() < Integer.parseInt(dataTests.getProperty("max.user.salary"))
                     , "User age less input age or User salary more input salary");
         }
     }

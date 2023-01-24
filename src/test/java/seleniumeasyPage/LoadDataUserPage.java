@@ -19,12 +19,12 @@ public class LoadDataUserPage {
 
     public LoadDataUserPage(WebDriver driver) {
         this.driver = driver;
-        this.driver.get(dataTests.getProperty("seleniumUserUrl"));
+        this.driver.get(dataTests.getProperty("load.user.url"));
     }
 
     public WebElement getImageUser() {
         driver.findElement(GET_NEW_USER_BUTTON).click();
-        return new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(dataTests.getProperty("explicitTime")))).until(ExpectedConditions.visibilityOfElementLocated(USER_IMAGE));
+        return new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(dataTests.getProperty("explicit.time")))).until(ExpectedConditions.visibilityOfElementLocated(USER_IMAGE));
     }
 }
 

@@ -26,7 +26,7 @@ public class TableSortSearchPage {
 
     public TableSortSearchPage(WebDriver driver) {
         this.driver = driver;
-        driver.get(dataTests.getProperty("seleniumEasyTableUrl"));
+        driver.get(dataTests.getProperty("table.url"));
     }
 
     private void selectOptionsDropdown(String selectEntries) {
@@ -35,36 +35,34 @@ public class TableSortSearchPage {
     }
 
     private void clickNextButton() {
-        if (!driver.findElement(By.xpath("//a[contains(@class,'button next')]")).getText().contains("disabled")) {
+        if (!driver.findElement(By.xpath("//a[contains(@class,'button next')]"))
+                .getText().contains("disabled")) {
             WebElement nextButton = driver.findElement(NEXT_BUTTON);
             nextButton.click();
         }
     }
 
-    public List<User> getUsersByAgeAndSalary(int minAgeUser, int maxSalaryUser, String selectEntries) {
-
-        selectOptionsDropdown(selectEntries);
-
+    public List<User> getUsersByAgeAndSalary() {
+        selectOptionsDropdown(dataTests.getProperty("select.entries"));
         List<User> userList = new ArrayList<>();
-
         for (int i = 0; i < driver.findElements(NUMBER_PAGES).size() - 1; i++) {
-
             List<WebElement> rowsList = driver.findElements(ROWS_USERS);
-
             for (WebElement element : rowsList) {
-
                 int userAge = Integer.parseInt(element.findElement(COLUMN_AGE).getText());
                 int salaryUser = Integer.parseInt(element.findElement(COLUMN_SALARY).getText()
-                        .replace("$", "").replace(",", "").replace("/y", "").trim());
-
-                if (userAge > minAgeUser & salaryUser < maxSalaryUser) {
+                        .replace("$", "").replace(",", "")
+                        .replace("/y", "").trim());
+                if (userAge > Integer.parseInt(dataTests.getProperty("min.user.age"))
+                        & salaryUser < Integer.parseInt(dataTests.getProperty("max.user.salary"))) {
                     User user = new User(
                             element.findElement(COLUMN_NAME).getText(),
                             element.findElement(COLUMN_POSITION).getText(),
                             element.findElement(COLUMN_OFFICE).getText(),
                             Integer.parseInt(element.findElement(COLUMN_AGE).getText()),
                             Integer.parseInt(element.findElement(COLUMN_SALARY).getText()
-                                    .replace("$", "").replace(",", "").replace("/y", "").trim())
+                                    .replace("$", "")
+                                    .replace(",", "")
+                                    .replace("/y", "").trim())
                     );
                     userList.add(user);
                 }

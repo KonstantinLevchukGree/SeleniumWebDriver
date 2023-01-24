@@ -59,7 +59,7 @@ public class CartTest {
 
     @Test
     @Ignore("bug delete RealItem and VirtualItem methods")
-    public void deleteRealItemAndVirtualItemFromCart() {
+    public void checkDeleteRealItemAndVirtualItemFromCart() {
 
         cart.deleteRealItem(car);
         cart.deleteVirtualItem(disk);

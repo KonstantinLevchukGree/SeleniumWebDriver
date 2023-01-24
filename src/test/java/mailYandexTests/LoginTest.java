@@ -17,17 +17,12 @@ public class LoginTest extends BaseTest {
 
     @SneakyThrows
     @Test
-    public void authentication() {
-
+    public void verifyAuthentication() {
         startPage = new StartPage(LocalChromeDriver.getInstance());
-
         //It is not a waiter. It looks like an Explicit waiter.
         Thread.sleep(5000);
-
         LoginPage loginPage = startPage.openLoginPage();
-
-        HomePage homePage = loginPage.openHomePage(dataTests.getProperty("userName"), dataTests.getProperty("userPassword"));
-
-        Assert.assertEquals(homePage.getUserName(dataTests.getProperty("userName")), dataTests.getProperty("userName"));
+        HomePage homePage = loginPage.openHomePage(dataTests.getProperty("user.name"), dataTests.getProperty("user.password"));
+        Assert.assertEquals(homePage.getUserName(dataTests.getProperty("user.name")), dataTests.getProperty("user.name"));
     }
 }

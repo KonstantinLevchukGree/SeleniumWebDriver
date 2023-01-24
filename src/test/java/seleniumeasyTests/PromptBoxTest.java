@@ -15,21 +15,21 @@ public class PromptBoxTest extends BaseTest {
     private final Properties dataTests = PropertyUtil.getProperties("testsData.properties");
 
     @Test
-    public void openPrompt() {
+    public void verifyOpenPrompt() {
         alertPage = new AlertPage(LocalChromeDriver.getInstance());
-        assertEquals(alertPage.getPromptText(), "Please enter your name", "Prompt did not open");
+        assertEquals(alertPage.getPromptInputText(), "Please enter your name", "Prompt did not open");
     }
 
     @Test
-    public void clickCancelConfirm() {
+    public void verifyCancelConfirm() {
         alertPage = new AlertPage(LocalChromeDriver.getInstance());
         assertEquals(alertPage.getPromptBoxText(), "", "Cancel button did not press");
     }
 
     //Failed
     @Test
-    public void inputTextPrompt() {
+    public void verifyPromptAcceptMessage() {
         alertPage = new AlertPage(LocalChromeDriver.getInstance());
-        assertEquals(alertPage.inputPromptText(dataTests.getProperty("test")), dataTests.getProperty("test"), "Input text does not match prompt box text");
+        assertEquals(alertPage.getPromptInputText(dataTests.getProperty("test.text")), dataTests.getProperty("test.text"), "Input text does not match prompt box text");
     }
 }

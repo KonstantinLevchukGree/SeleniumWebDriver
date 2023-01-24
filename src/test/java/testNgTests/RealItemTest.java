@@ -18,7 +18,7 @@ public class RealItemTest {
 
     @Parameters({"weight car"})
     @Test(groups = {"group test"})
-    public void checkWeightCarTest(String weightCar) {
+    public void checkWeightCar(String weightCar) {
         Assert.assertEquals(car.getWeight(), Double.parseDouble(weightCar), "Weight Car not equal Weight Car in test data");
     }
 }

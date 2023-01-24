@@ -11,7 +11,7 @@ public class LoadingDataUserTest extends BaseTest {
     private LoadDataUserPage userPage;
 
     @Test
-    public void waitUser() {
+    public void verifyLoadUser() {
         userPage = new LoadDataUserPage(LocalChromeDriver.getInstance());
         assertNotNull(userPage.getImageUser(), "Data user not loaded");
     }

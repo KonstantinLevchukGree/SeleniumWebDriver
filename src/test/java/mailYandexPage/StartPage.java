@@ -13,7 +13,7 @@ public class StartPage {
 
     public StartPage(WebDriver driver) {
         this.driver = driver;
-        this.driver.get(dataTests.getProperty("mailYandexUrl"));
+        this.driver.get(dataTests.getProperty("mail.yandex.url"));
     }
 
     public LoginPage openLoginPage() {

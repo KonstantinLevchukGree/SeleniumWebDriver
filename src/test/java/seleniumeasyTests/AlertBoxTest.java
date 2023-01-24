@@ -11,10 +11,8 @@ public class AlertBoxTest extends BaseTest {
     private AlertPage alertPage;
 
     @Test
-    public void openAlert() {
-
+    public void verifyOpenAlert() {
         alertPage = new AlertPage(LocalChromeDriver.getInstance());
-
         assertEquals(alertPage.getAlertText(), "I am an alert box!", "Alert did not open");
     }
 }
