@@ -20,7 +20,6 @@ public class JsonParserTest {
     private Cart newCart;
     private final String cartName = "test-cart";
     private final String testCartName = "andrew-cart";
-
     private final String carName = "Nissan";
     private final String diskName = "WD400";
     private final double carWeight = 2000.2;
@@ -28,7 +27,7 @@ public class JsonParserTest {
     private final int diskPrice = 50;
     private final int diskSize = 20000;
 
-    @DataProvider(name = "Data Provider and Parallel threads", parallel = true)
+    @DataProvider(name = "checkWriteFromFileFileNegative", parallel = true)
     public Object[][] createData() {
         return new Object[][]{{"cart1"}, {"cart2"}, {"cart3"}, {"cart4"}, {"cart5"}};
     }
@@ -55,21 +54,21 @@ public class JsonParserTest {
     }
 
     @Test()
-    public void checkWriteFromFilePositiveTest() {
+    public void checkWriteFromFilePositive() {
         parser.writeToFile(cart);
         newCart = parser.readFromFile(new File("src/main/resources/" + cartName + ".json"));
         Assert.assertNotNull(newCart, "Failed to write the file");
     }
 
     @Test(dataProvider = "Data Provider and Parallel threads", expectedExceptions = {NoSuchFileException.class})
-    public void checkWriteFromFileFileNegativeTest(String notExistCartName) {
+    public void checkWriteFromFileFileNegative(String notExistCartName) {
         parser.writeToFile(cart);
         newCart = parser.readFromFile(new File("src/main/resources/" + notExistCartName + ".json"));
         Assert.assertNull(newCart, "Successfully wrote the file");
     }
 
     @Test
-    public void checkReadToFileTest() {
+    public void checkReadToFilePositive() {
         newCart = parser.readFromFile(new File("src/main/resources/" + testCartName + ".json"));
         Assert.assertNotNull(testCartName, "Failed to read the file");
     }
