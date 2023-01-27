@@ -9,8 +9,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertyUtil;
+import utils.ScreenshotUtil;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 public class HomePage {
@@ -25,6 +28,8 @@ public class HomePage {
     public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        ScreenshotUtil.getSnapShot(driver, "src/test/java/screenshots/" + HomePage.class.getSimpleName() + " "
+                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss")) + ".png");
     }
 
     private void clickUserMenu() {
