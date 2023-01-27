@@ -1,40 +1,41 @@
 package mailYandexPage;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
     private final WebDriver driver;
-    private final By LOGIN_INPUT = By.id("passp-field-login");
-    private final By LOGIN_BUTTON = By.id("passp:sign-in");
-    private final By PASSWORD_INPUT = By.id("passp-field-passwd");
+    @FindBy(id = "passp-field-login")
+    WebElement loginInput;
+    @FindBy(id = "passp:sign-in")
+    WebElement loginButton;
+    @FindBy(id = "passp-field-passwd")
+    WebElement passwordInput;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     private void inputLogin(String login) {
-        driver.findElement(LOGIN_INPUT).sendKeys(login);
+        loginInput.sendKeys(login);
     }
 
     private void clickLoginButton() {
-        driver.findElement(LOGIN_BUTTON).click();
+        loginButton.click();
     }
 
     private void inputPassword(String password) {
-        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(PASSWORD_INPUT));
-        driver.findElement(PASSWORD_INPUT).sendKeys(password);
+        passwordInput.sendKeys(password);
     }
 
     public HomePage openHomePage(String login, String password) {
         inputLogin(login);
         clickLoginButton();
         inputPassword(password);
-        driver.findElement(LOGIN_BUTTON).click();
+        clickLoginButton();
         return new HomePage(driver);
     }
 }

@@ -2,6 +2,9 @@ package seleniumeasyPage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertyUtil;
@@ -13,17 +16,20 @@ import java.util.regex.Pattern;
 
 public class ProgressBarPage {
     private final WebDriver driver;
-    private final By DOWNLOAD_BUTTON = By.id("cricle-btn");
+
+    @FindBy(id = "cricle-btn")
+    WebElement downloadButton;
     private final By PERCENT_PROGRESS_BAR = By.xpath("//div[contains(@class,'percent')]");
     private final Properties dataTests = PropertyUtil.getProperties("testsData.properties");
 
     public ProgressBarPage(WebDriver driver) {
         this.driver = driver;
         this.driver.get(dataTests.getProperty("progress.bar.url"));
+        PageFactory.initElements(driver, this);
     }
 
     private void startProgressBar() {
-        driver.findElement(DOWNLOAD_BUTTON).click();
+        downloadButton.click();
     }
 
     public int getPercentProgressBar() {

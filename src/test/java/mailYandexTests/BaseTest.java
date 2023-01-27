@@ -7,7 +7,6 @@ import utils.singleton.LocalChromeDriver;
 import java.time.Duration;
 
 public class BaseTest {
-
     @Before
     public void setUp() {
         LocalChromeDriver.getInstance().manage().window().maximize();
