@@ -14,9 +14,9 @@ import java.util.Properties;
 public class LoadDataUserPage {
     private final WebDriver driver;
     @FindBy(id = "save")
-    WebElement GET_NEW_USER_BUTTON;
+    WebElement getNewUserButton;
     @FindBy(xpath = "//div[@id=\"loading\"]/img")
-    WebElement USER_IMAGE;
+    WebElement userImage;
     private final Properties dataTests = PropertyUtil.getProperties("testsData.properties");
 
     public LoadDataUserPage(WebDriver driver) {
@@ -26,8 +26,8 @@ public class LoadDataUserPage {
     }
 
     public WebElement getImageUser() {
-        GET_NEW_USER_BUTTON.click();
-        return new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(dataTests.getProperty("explicit.time")))).until(ExpectedConditions.visibilityOf(USER_IMAGE));
+        getNewUserButton.click();
+        return new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(dataTests.getProperty("explicit.time")))).until(ExpectedConditions.visibilityOf(userImage));
     }
 }
 

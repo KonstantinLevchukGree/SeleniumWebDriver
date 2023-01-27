@@ -18,7 +18,7 @@ public class ProgressBarPage {
     private final WebDriver driver;
 
     @FindBy(id = "cricle-btn")
-    WebElement DOWNLOAD_BUTTON;
+    WebElement downloadButton;
     private final By PERCENT_PROGRESS_BAR = By.xpath("//div[contains(@class,'percent')]");
     private final Properties dataTests = PropertyUtil.getProperties("testsData.properties");
 
@@ -29,7 +29,7 @@ public class ProgressBarPage {
     }
 
     private void startProgressBar() {
-        DOWNLOAD_BUTTON.click();
+        downloadButton.click();
     }
 
     public int getPercentProgressBar() {

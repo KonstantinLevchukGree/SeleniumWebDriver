@@ -16,13 +16,13 @@ import java.util.Properties;
 public class TableSortSearchPage {
     private final WebDriver driver;
     @FindBy(xpath = "//select[contains(@name,'example')]")
-    WebElement SELECT;
+    WebElement entriesSelect;
     @FindBy(id = "example_next")
-    WebElement NEXT_BUTTON;
+    WebElement nextButton;
     @FindBy(xpath = "//div[@id='example_paginate']//span//a")
-    List<WebElement> NUMBER_PAGES;
+    List<WebElement> numberPages;
     @FindBy(xpath = "//table[@id='example']//tr[@class]")
-    List<WebElement> ROWS_USERS;
+    List<WebElement> rowsUsers;
     private final By COLUMN_NAME = By.xpath(".//td[1]");
     private final By COLUMN_POSITION = By.xpath(".//td[2]");
     private final By COLUMN_OFFICE = By.xpath(".//td[3]");
@@ -37,22 +37,22 @@ public class TableSortSearchPage {
     }
 
     private void selectOptionsDropdown(String selectEntries) {
-        Select select = new Select(SELECT);
+        Select select = new Select(this.entriesSelect);
         select.selectByValue(selectEntries);
     }
 
     private void clickNextButton() {
         if (!driver.findElement(By.xpath("//a[contains(@class,'button next')]"))
                 .getText().contains("disabled")) {
-            NEXT_BUTTON.click();
+            nextButton.click();
         }
     }
 
     public List<User> getUsersByAgeAndSalary() {
         selectOptionsDropdown(dataTests.getProperty("select.entries"));
         List<User> userList = new ArrayList<>();
-        for (int i = 0; i < NUMBER_PAGES.size() - 1; i++) {
-            List<WebElement> rowsList = ROWS_USERS;
+        for (int i = 0; i < numberPages.size() - 1; i++) {
+            List<WebElement> rowsList = rowsUsers;
             for (WebElement element : rowsList) {
                 int userAge = Integer.parseInt(element.findElement(COLUMN_AGE).getText());
                 int salaryUser = Integer.parseInt(element.findElement(COLUMN_SALARY).getText()

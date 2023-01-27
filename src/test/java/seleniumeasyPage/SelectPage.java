@@ -15,7 +15,7 @@ import java.util.Random;
 public class SelectPage {
     private final WebDriver driver;
     @FindBy(id = "multi-select")
-    WebElement MULTI_SELECT;
+    WebElement multiSelect;
     private final Properties dataTests = PropertyUtil.getProperties("testsData.properties");
 
     public SelectPage(WebDriver driver) {
@@ -25,7 +25,7 @@ public class SelectPage {
     }
 
     public List<WebElement> getSelectRandomOptions() {
-        Select multiSelect = new Select(MULTI_SELECT);
+        Select multiSelect = new Select(this.multiSelect);
         List<WebElement> list = multiSelect.getOptions();
         List<WebElement> selectOptions = new ArrayList<>();
         Random random = new Random();
@@ -38,7 +38,7 @@ public class SelectPage {
     }
 
     public List<WebElement> getSelectedOptions() {
-        Select multiSelect = new Select(MULTI_SELECT);
+        Select multiSelect = new Select(this.multiSelect);
         return multiSelect.getAllSelectedOptions();
     }
 }

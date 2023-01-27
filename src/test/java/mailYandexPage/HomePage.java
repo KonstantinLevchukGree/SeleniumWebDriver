@@ -16,9 +16,9 @@ import java.util.Properties;
 public class HomePage {
     private final WebDriver driver;
     @FindBy(xpath = "//div[contains(@class,'User')]")
-    WebElement USER_MENU_BUTTON;
+    WebElement userMenuButton;
     @FindBy(xpath = "//span[contains(text(),'Log out')]")
-    WebElement LOG_OUT_BUTTON;
+    WebElement logOutButton;
     private final String USER_NAME_LABEL = "//div[contains(@class,'name')]/span[contains(text(),'%s')]";
     private final Properties dataTests = PropertyUtil.getProperties("testsData.properties");
 
@@ -29,8 +29,8 @@ public class HomePage {
 
     private void clickUserMenu() {
         new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(dataTests.getProperty("explicit.time"))))
-                .until(ExpectedConditions.elementToBeClickable(USER_MENU_BUTTON));
-        USER_MENU_BUTTON.click();
+                .until(ExpectedConditions.elementToBeClickable(userMenuButton));
+        userMenuButton.click();
     }
 
     public String getUserName(String userName) {
@@ -45,7 +45,7 @@ public class HomePage {
 
     public StartPage logOutUser() {
         clickUserMenu();
-        LOG_OUT_BUTTON.click();
+        logOutButton.click();
         return new StartPage(driver);
     }
 }

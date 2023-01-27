@@ -15,15 +15,15 @@ import java.util.Properties;
 public class AlertPage {
     private final WebDriver driver;
     @FindBy(xpath = "//button[contains(@onclick,'Alert')]")
-    WebElement ALERT_BUTTON;
+    WebElement alertButton;
     @FindBy(xpath = "//button[contains(@onclick,'Confirm')]")
-    WebElement CONFIRM_BUTTON;
+    WebElement confirmButton;
     @FindBy(xpath = "//button[contains(@onclick,'Prompt')]")
-    WebElement PROMPT_BUTTON;
+    WebElement promptButton;
     @FindBy(id = "confirm-demo")
-    WebElement CONFIRM_BOX_TEXT;
+    WebElement confirmBoxText;
     @FindBy(id = "prompt-demo")
-    WebElement PROMPT_BOX_TEXT;
+    WebElement promptBoxText;
 
     private final Properties dataTests = PropertyUtil.getProperties("testsData.properties");
 
@@ -53,33 +53,33 @@ public class AlertPage {
     }
 
     public String getAlertText() {
-        return getAlertTextAndAccept(ALERT_BUTTON);
+        return getAlertTextAndAccept(alertButton);
     }
 
     public String getConfirmText() {
-        return getAlertTextAndDismiss(CONFIRM_BUTTON);
+        return getAlertTextAndDismiss(confirmButton);
     }
 
     public String getConfirmBoxText() {
-        Alert alert = openAlertAndWait(CONFIRM_BUTTON);
+        Alert alert = openAlertAndWait(confirmButton);
         alert.dismiss();
-        return CONFIRM_BOX_TEXT.getText();
+        return confirmBoxText.getText();
     }
 
     public String getPromptInputText() {
-        return getAlertTextAndDismiss(PROMPT_BUTTON);
+        return getAlertTextAndDismiss(promptButton);
     }
 
     public String getPromptBoxText() {
-        Alert alert = openAlertAndWait(PROMPT_BUTTON);
+        Alert alert = openAlertAndWait(promptButton);
         alert.dismiss();
-        return PROMPT_BOX_TEXT.getText();
+        return promptBoxText.getText();
     }
 
     public String getPromptInputText(String text) {
-        Alert alert = openAlertAndWait(PROMPT_BUTTON);
+        Alert alert = openAlertAndWait(promptButton);
         alert.sendKeys(text);
         alert.accept();
-        return PROMPT_BOX_TEXT.getText();
+        return promptBoxText.getText();
     }
 }

@@ -11,7 +11,7 @@ import java.util.Properties;
 public class StartPage {
     private final WebDriver driver;
     @FindBy(xpath = "//button[contains(@class,'Login')]")
-    WebElement LOGIN_BUTTON;
+    WebElement loginButton;
     private final Properties dataTests = PropertyUtil.getProperties("testsData.properties");
 
     public StartPage(WebDriver driver) {
@@ -21,11 +21,11 @@ public class StartPage {
     }
 
     public LoginPage openLoginPage() {
-        LOGIN_BUTTON.click();
+        loginButton.click();
         return new LoginPage(driver);
     }
 
     public WebElement getLoginButton() {
-        return LOGIN_BUTTON;
+        return loginButton;
     }
 }

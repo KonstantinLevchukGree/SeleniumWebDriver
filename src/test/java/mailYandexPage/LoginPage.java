@@ -8,11 +8,11 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginPage {
     private final WebDriver driver;
     @FindBy(id = "passp-field-login")
-    WebElement LOGIN_INPUT;
+    WebElement loginInput;
     @FindBy(id = "passp:sign-in")
-    WebElement LOGIN_BUTTON;
+    WebElement loginButton;
     @FindBy(id = "passp-field-passwd")
-    WebElement PASSWORD_INPUT;
+    WebElement passwordInput;
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -20,15 +20,15 @@ public class LoginPage {
     }
 
     private void inputLogin(String login) {
-        LOGIN_INPUT.sendKeys(login);
+        loginInput.sendKeys(login);
     }
 
     private void clickLoginButton() {
-        LOGIN_BUTTON.click();
+        loginButton.click();
     }
 
     private void inputPassword(String password) {
-        PASSWORD_INPUT.sendKeys(password);
+        passwordInput.sendKeys(password);
     }
 
     public HomePage openHomePage(String login, String password) {
