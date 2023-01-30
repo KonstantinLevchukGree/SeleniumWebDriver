@@ -28,8 +28,6 @@ public class HomePage {
     public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
-        ScreenshotUtil.getSnapShot(driver, "src/test/java/screenshots/" + HomePage.class.getSimpleName() + " "
-                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss")) + ".png");
     }
 
     private void clickUserMenu() {

@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.ScreenshotUtil;
 
 public class LoginPage {
     private final WebDriver driver;
@@ -36,6 +37,7 @@ public class LoginPage {
         clickLoginButton();
         inputPassword(password);
         clickLoginButton();
+        ScreenshotUtil.getSnapShot();
         return new HomePage(driver);
     }
 }
