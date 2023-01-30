@@ -35,7 +35,8 @@ public class AlertPage {
 
     private Alert openAlertAndWait(WebElement webElement) {
         webElement.click();
-        return new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(dataTests.getProperty("explicit.time")))).until(ExpectedConditions.alertIsPresent());
+        return new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(dataTests.getProperty("explicit.time"))))
+                .until(ExpectedConditions.alertIsPresent());
     }
 
     private String getAlertTextAndAccept(WebElement webElement) {
