@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.PropertyUtil;
+import utils.ScreenShotUtil;
 
 import java.time.Duration;
 import java.util.Properties;

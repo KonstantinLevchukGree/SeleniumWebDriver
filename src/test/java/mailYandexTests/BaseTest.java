@@ -1,11 +1,13 @@
 package mailYandexTests;
 
-import org.junit.After;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import testResultUtil.TestResultExtension;
 import utils.singleton.LocalChromeDriver;
 
 import java.time.Duration;
-
+@ExtendWith(TestResultExtension.class)
 public class BaseTest {
     @Before
     public void setUp() {
@@ -14,7 +16,7 @@ public class BaseTest {
         LocalChromeDriver.getInstance().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     }
 
-    @After
+    @AfterEach
     public void closeChrome() {
         LocalChromeDriver.quit();
     }

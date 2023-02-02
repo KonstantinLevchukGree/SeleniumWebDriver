@@ -1,5 +1,6 @@
 package utils;
 
+import io.qameta.allure.Attachment;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -10,7 +11,7 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class ScreenshotUtil {
+public class ScreenShotUtil {
     @SneakyThrows
     public static void getSnapShot() {
         TakesScreenshot scrShot = ((TakesScreenshot) LocalChromeDriver.getInstance());
@@ -18,5 +19,9 @@ public class ScreenshotUtil {
         File DestFile = new File("src/test/java/screenshots/" + " "
                 + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss")) + ".png");
         FileUtils.copyFile(SrcFile, DestFile);
+    }
+    @Attachment
+    public static byte[] attachScreenshot() {
+        return ((TakesScreenshot) LocalChromeDriver.getInstance()).getScreenshotAs(OutputType.BYTES);
     }
 }

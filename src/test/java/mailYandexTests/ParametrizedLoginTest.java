@@ -1,5 +1,6 @@
 package mailYandexTests;
 
+import io.qameta.allure.*;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,6 +19,12 @@ public class ParametrizedLoginTest extends BaseTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/userData.csv")
     @DisplayName("Test failed, After entered password required an SMS code")
+    @Flaky
+    @Description(value = "The test checks LogIn Users")
+    @Epic(value = "Mail yandex")
+    @Feature(value = "Authentication")
+    @Story(value = "LogIn")
+    @Issue(value = "FGY-3")
     public void verifyAuthentication(String userLogin, String UserPassword) {
         startPage = new StartPage(LocalChromeDriver.getInstance());
         LoginPage loginPage = startPage.openLoginPage();
