@@ -27,7 +27,7 @@ public class LoadDataUserPage {
 
     public WebElement getImageUser() {
         getNewUserButton.click();
-        return new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(dataTests.getProperty("explicit.time")))).until(ExpectedConditions.visibilityOf(userImage));
+        return new WebDriverWait(driver, Integer.parseInt(dataTests.getProperty("explicit.time"))).until(ExpectedConditions.visibilityOf(userImage));
     }
 }
 

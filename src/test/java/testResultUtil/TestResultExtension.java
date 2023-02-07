@@ -19,7 +19,6 @@ public class TestResultExtension implements AfterTestExecutionCallback {
         String result = passed ? "FAILED" : "PASSED";
         if (result.equals("FAILED")) {
             ScreenShotUtil.attachScreenshot();
-
             Path content = Paths.get("src/test/resources/environment.properties");
             try (InputStream is = Files.newInputStream(content)) {
                 Allure.addAttachment("Environment", is);

@@ -4,12 +4,12 @@ import io.qameta.allure.*;
 import mailYandexPage.HomePage;
 import mailYandexPage.LoginPage;
 import mailYandexPage.StartPage;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
 import utils.PropertyUtil;
-import utils.singleton.LocalChromeDriver;
+import utils.singleton.SingletonInstance;
 
 import java.util.Properties;
 
@@ -31,7 +31,7 @@ public class AuthenticationTest extends BaseTest {
     @Description(value = "Test checks LogIn User")
     @Issue(value = "FGY-1")
     public void verifyLogIn() {
-        startPage = new StartPage(LocalChromeDriver.getInstance());
+        startPage = new StartPage(SingletonInstance.getInstance().getDriver());
         LoginPage loginPage = startPage.openLoginPage();
         HomePage homePage = loginPage.openHomePage(dataTests.getProperty("user.name"), dataTests.getProperty("user.password"));
         assertEquals(homePage.getUserName(dataTests.getProperty("user.name")), dataTests.getProperty("user.name"), "LogIn to yandex mail failed");
@@ -48,7 +48,7 @@ public class AuthenticationTest extends BaseTest {
     @Description(value = "Test checks LogOut User")
     @Issue(value = "FGY-2")
     public void verifyLogOut() {
-        startPage = new StartPage(LocalChromeDriver.getInstance());
+        startPage = new StartPage(SingletonInstance.getInstance().getDriver());
         LoginPage loginPage = startPage.openLoginPage();
         HomePage homePage = loginPage.openHomePage(dataTests.getProperty("user.name"), dataTests.getProperty("user.password"));
         startPage = homePage.logOutUser();

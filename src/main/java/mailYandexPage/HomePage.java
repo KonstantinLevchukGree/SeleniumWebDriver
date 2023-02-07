@@ -28,7 +28,7 @@ public class HomePage {
     }
 
     private void clickUserMenu() {
-        new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(dataTests.getProperty("explicit.time"))))
+        new WebDriverWait(driver, Integer.parseInt(dataTests.getProperty("explicit.time")))
                 .until(ExpectedConditions.elementToBeClickable(userMenuButton));
         userMenuButton.click();
     }
