@@ -3,6 +3,7 @@ package utils.singleton;
 import lombok.SneakyThrows;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import utils.PropertyUtil;
@@ -29,6 +30,7 @@ public class SingletonInstance {
     public WebDriver getDriver() {
         if (dataTests.getProperty("environment").equals("local")) {
             driver = new ChromeDriver();
+            driver.manage().window().maximize();
         } else if (dataTests.getProperty("environment").equals("remote")) {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName("chrome");
