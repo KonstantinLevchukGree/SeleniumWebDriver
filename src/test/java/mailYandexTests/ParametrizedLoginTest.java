@@ -1,14 +1,14 @@
 package mailYandexTests;
 
 import io.qameta.allure.*;
+import mailYandexPage.HomePage;
+import mailYandexPage.LoginPage;
+import mailYandexPage.StartPage;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import mailYandexPage.HomePage;
-import mailYandexPage.LoginPage;
-import mailYandexPage.StartPage;
-import utils.singleton.LocalChromeDriver;
+import utils.singleton.SingletonInstance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -26,7 +26,7 @@ public class ParametrizedLoginTest extends BaseTest {
     @Story(value = "LogIn")
     @Issue(value = "FGY-3")
     public void verifyAuthentication(String userLogin, String UserPassword) {
-        startPage = new StartPage(LocalChromeDriver.getInstance());
+        startPage = new StartPage(SingletonInstance.getInstance().getDriver());
         LoginPage loginPage = startPage.openLoginPage();
         HomePage homePage = loginPage.openHomePage(userLogin, UserPassword);
         assertEquals(homePage.getUserName(userLogin), userLogin, "LogIn to yandex mail failed");

@@ -14,7 +14,7 @@ import java.time.Duration;
 import java.util.Properties;
 
 public class AlertPage {
-    private final WebDriver driver;
+    private  WebDriver driver;
     @FindBy(xpath = "//button[contains(@onclick,'Alert')]")
     WebElement alertButton;
     @FindBy(xpath = "//button[contains(@onclick,'Confirm')]")
@@ -36,7 +36,7 @@ public class AlertPage {
 
     private Alert openAlertAndWait(WebElement webElement) {
         webElement.click();
-        return new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(dataTests.getProperty("explicit.time"))))
+        return new WebDriverWait(driver, Integer.parseInt(dataTests.getProperty("explicit.time")))
                 .until(ExpectedConditions.alertIsPresent());
     }
 

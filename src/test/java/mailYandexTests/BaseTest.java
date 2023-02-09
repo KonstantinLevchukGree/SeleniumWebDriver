@@ -1,23 +1,20 @@
 package mailYandexTests;
 
-import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import testResultUtil.TestResultExtension;
-import utils.singleton.LocalChromeDriver;
+import utils.singleton.SingletonInstance;
 
-import java.time.Duration;
 @ExtendWith(TestResultExtension.class)
 public class BaseTest {
-    @Before
+  /*  @BeforeEach
     public void setUp() {
-        LocalChromeDriver.getInstance().manage().window().maximize();
         //Implicit waiter
-        LocalChromeDriver.getInstance().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-    }
+        SingletonDriver.getInstance().getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    }*/
 
     @AfterEach
     public void closeChrome() {
-        LocalChromeDriver.quit();
+        SingletonInstance.getInstance().quitAll();
     }
 }
